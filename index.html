@@ -26,7 +26,7 @@
                         throw new Error("Input did not return valid call signs");
                     }
 
-                    const totalLetters = buildHash( calls );
+                    const totalLetters = buildHash( calls, 2 );
                     csvInput.value = "Letter Hash: " + JSON.stringify( totalLetters );
                     
                     //check for words we can spell
@@ -43,7 +43,10 @@
     <h1>Check for Anagrams in your WES log</h1>
     <form id="main">
         <h4>Skcc logger: Click "File > Export Excell style csv" and paste results here</h4>
-    <textarea name="csv" id="CSV" cols="120" rows="40">Click "File > Export Excell style csv" and paste results here
+        <p style="font-style: bold; color: red">Be sure to remove any column headers from the csv data. This is usally the first row</p>
+    <textarea name="csv" id="CSV" cols="120" rows="40">
+Data should be in the following format:
+"QSO_Nr","QSO_DATE","TIME_ON","TIME_OFF","CALL","SKCC","NAME","STATE","FREQ","BAND","RST_RCVD","RST_SENT","QTH","COUNTRY","DXCC","MODE","RX_PWR","TX_PWR","QSL_RCVD","QSL_SENT","GRIDSQUARE","Key_Type","COMMENT"
     </textarea>
 
     <h4>Enter list of words to check here, use CAPS and one word/ phrase per line</h4>
@@ -57,8 +60,7 @@ GRAVY
 GREEN BEANS
 PUMPKIN PIE
 BREAD
-YAMS
-    </textarea>
+YAMS</textarea>
     <button type="submit">Check results</button>
     </form>
     <div id="results">
