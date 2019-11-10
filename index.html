@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Thanksgiving WES anagrams</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script lang="javascript">
         document.addEventListener('DOMContentLoaded', ()=>{
             const form = document.getElementById("main");
@@ -41,16 +42,16 @@
 </head>
 <body>
     <h1>Check for Anagrams in your WES log</h1>
-    <form id="main">
+    <form id="main" class="form-group"
         <h4>Skcc logger: Click "File > Export Excell style csv" and paste results here</h4>
         <p style="font-style: bold; color: red">Be sure to remove any column headers from the csv data. This is usally the first row</p>
-    <textarea name="csv" id="CSV" cols="120" rows="40">
+    <textarea name="csv" id="CSV" class="form-control" cols="120" rows="20">
 Data should be in the following format:
 "QSO_Nr","QSO_DATE","TIME_ON","TIME_OFF","CALL","SKCC","NAME","STATE","FREQ","BAND","RST_RCVD","RST_SENT","QTH","COUNTRY","DXCC","MODE","RX_PWR","TX_PWR","QSL_RCVD","QSL_SENT","GRIDSQUARE","Key_Type","COMMENT"
     </textarea>
 
     <h4>Enter list of words to check here, use CAPS and one word/ phrase per line</h4>
-    <textarea name="words" id="WORDS" cols="40" rows="5">
+    <textarea name="words" id="WORDS" cols="40" rows="5" class="form-control">
 TURKEY
 STUFFING
 CRANBERRIES
@@ -61,12 +62,12 @@ GREEN BEANS
 PUMPKIN PIE
 BREAD
 YAMS</textarea>
-    <button type="submit">Check results</button>
+    <button class="btn btn-primary" type="submit">Check results</button>
     </form>
-    <div id="results">
-        <ul class="results" style="color:green">
-        </ul>
-    </div>
+    <a href="https://github.com/dcsim0n/november-wes-anagrams">View on Github: @dcsim0n</a>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="papaparse.min.js"></script>
     <script src="index.js"></script>
 </body>
