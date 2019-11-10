@@ -29,7 +29,7 @@ function buildHash( arr ){
                 if(letterHash[ letters[j] ]){
                     letterHash[ letters[j] ] = letterHash[letters[j]] + LETTER_MULTIPLIER //If the letter is already there, increase the count 
                 }else{
-                    letterHash[ letters[j] ] = 1;
+                    letterHash[ letters[j] ] = LETTER_MULTIPLIER;
                 }
             }
         }
