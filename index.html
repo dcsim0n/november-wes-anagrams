@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thanksgiving WES anagrams</title>
+    <script lang="javascript">
+        document.addEventListener('DOMContentLoaded', ()=>{
+            const form = document.getElementById("main");
+            form.onsubmit = handleSubmit;
+            console.log("Loaded..")
+
+        });
+        function handleSubmit( e ){
+                e.preventDefault();
+                const csvInput = document.getElementById("CSV");
+                const words = document.getElementById("WORDS").value.split('\n');
+                try {
+                    // Validate input
+                    if(words.length < 1 ){
+                        throw new Error("Words input must contain at least one line");
+                    }
+                    const calls = loadCalls( csvInput.value );
+                    if( calls.length < 1){
+                        throw new Error("Input did not return valid call signs");
+                    }
+
+                    const totalLetters = buildHash( calls );
+                    csvInput.value = "Letter Hash: " + JSON.stringify( totalLetters );
+                    
+                    //check for words we can spell
+
+                    const spelledWords = checkWords( totalLetters, words );
+                    csvInput.value += "\n\nYour log spells the following: \n\n" + spelledWords
+                } catch (error) {
+                    alert(error);
+                }
+        }
+    </script>
+</head>
+<body>
+    
+    <form id="main">
+    <textarea name="csv" id="CSV" cols="80" rows="40">Click "File > Export Excell style csv" and paste results here
+    </textarea>
+
+    <textarea name="words" id="WORDS" cols="40" rows="5">
+TURKEY
+STUFFING
+CRANBERRIES
+CORN
+MASHED POTATOES
+GRAVY
+GREEN BEANS
+PUMPKIN PIE
+BREAD
+YAMS
+    </textarea>
+    <button type="submit">Check results</button>
+    </form>
+    <div id="results">
+        <ul class="results" style="color:green">
+        </ul>
+    </div>
+    <script src="papaparse.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

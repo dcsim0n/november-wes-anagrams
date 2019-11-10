@@ -5,21 +5,15 @@
 |--------------------------------------------------
 */
 
-const os = require('os');
-const fs = require('fs');
-const Papa = require('papaparse');
-
-const FILE = 'Nov-WES.csv';
 
 LETTER_MULTIPLIER = 2;
 
-function loadCalls(file){
-    const text = fs.readFileSync(file,{ encoding: 'utf8' }); 
+function loadCalls(text){ 
     const parsedTest = Papa.parse(text);
 
     callSigns = parsedTest.data.map( row =>{
         return row[4];
-    })
+    })          
 
     return callSigns.filter( call => call ); //Filter undefined values
 }
@@ -43,25 +37,23 @@ function buildHash( arr ){
     return letterHash;
 }
 
-const calls = loadCalls(FILE);
-
-const totalLetters = buildHash( calls );
-console.log("totalLetters: ", totalLetters);
-
-const words = fs.readFileSync( 'words.txt' , { encoding: 'utf8' }).split('\r\n');
-
-words.forEach( word =>{
-    const targetLetters = buildHash( [word] );
-    let isSpelled = true;
-    Object.keys(targetLetters).forEach( letter =>{
-        if( targetLetters[letter] > totalLetters[letter] ){ // Check if there are enough letters to spell this word
-            isSpelled = false;
-        }else{
-            totalLetters[letter]--;
+function checkWords( totalLetters, words ){
+    return words.filter( word =>{
+        const targetLetters = buildHash( [word] );
+        let isSpelled = true;
+        Object.keys(targetLetters).forEach( letter =>{
+            if( targetLetters[letter] > totalLetters[letter] ){ // Check if there are enough letters to spell this word
+                isSpelled = false;
+            }else{
+                totalLetters[letter]--;
+            }
+        });
+        if(isSpelled){
+            console.log("Passed test: ", word);
         }
+        return isSpelled;
     });
-    if(isSpelled){
-        console.log("Passed test: ", word);
-    }
-});
+
+}
+
 
