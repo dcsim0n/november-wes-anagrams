@@ -26,7 +26,7 @@
                         throw new Error("Input did not return valid call signs");
                     }
 
-                    const totalLetters = buildHash( calls );
+                    const totalLetters = buildHash( calls, 2 );
                     csvInput.value = "Letter Hash: " + JSON.stringify( totalLetters );
                     
                     //check for words we can spell

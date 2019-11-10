@@ -6,7 +6,7 @@
 */
 
 
-LETTER_MULTIPLIER = 2;
+
 
 function loadCalls(text){ 
     const parsedTest = Papa.parse(text);
@@ -18,7 +18,7 @@ function loadCalls(text){
     return callSigns.filter( call => call ); //Filter undefined values
 }
 
-function buildHash( arr ){
+function buildHash( arr, multiplier=1 ){
     const letterHash = {};
     
     for (let i = 0; i < arr.length; i++){
@@ -27,13 +27,15 @@ function buildHash( arr ){
             
             for(let j = 0; j < letters.length; j++) {
                 if(letterHash[ letters[j] ]){
-                    letterHash[ letters[j] ] = letterHash[letters[j]] + LETTER_MULTIPLIER //If the letter is already there, increase the count 
+                    letterHash[ letters[j] ] = letterHash[letters[j]] + multiplier //If the letter is already there, increase the count 
                 }else{
-                    letterHash[ letters[j] ] = LETTER_MULTIPLIER;
+                    letterHash[ letters[j] ] = multiplier;
                 }
             }
         }
     }
+    console.log("Hash for: ", arr)
+    console.log(letterHash);
     return letterHash;
 }
 
@@ -41,8 +43,12 @@ function checkWords( totalLetters, words ){
     return words.filter( word =>{
         const targetLetters = buildHash( [word] );
         let isSpelled = true;
+        console.log("Checking", word)
         Object.keys(targetLetters).forEach( letter =>{
-            if( targetLetters[letter] > totalLetters[letter] ){ // Check if there are enough letters to spell this word
+            console.log(`totalLetters[${letter}]`, totalLetters[letter])
+            if(totalLetters[letter] == undefined ){
+                isSpelled = false;
+            }else if( targetLetters[letter] > totalLetters[letter] ){ // Check if there are enough letters to spell this word
                 isSpelled = false;
             }else{
                 totalLetters[letter]--;
