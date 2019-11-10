@@ -1,0 +1,10 @@
+{
+  "name": "anagrams",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Dana Simmons <dsanalog@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "papaparse": "^5.1.0"
+  }
+}
