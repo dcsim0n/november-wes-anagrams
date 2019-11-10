@@ -11,6 +11,8 @@ const Papa = require('papaparse');
 
 const FILE = 'Nov-WES.csv';
 
+LETTER_MULTIPLIER = 2;
+
 function loadCalls(file){
     const text = fs.readFileSync(file,{ encoding: 'utf8' }); 
     const parsedTest = Papa.parse(text);
@@ -31,7 +33,7 @@ function buildHash( arr ){
             
             for(let j = 0; j < letters.length; j++) {
                 if(letterHash[ letters[j] ]){
-                    letterHash[ letters[j] ] = letterHash[letters[j]] + 2 //If the letter is already there, increase the count 
+                    letterHash[ letters[j] ] = letterHash[letters[j]] + LETTER_MULTIPLIER //If the letter is already there, increase the count 
                 }else{
                     letterHash[ letters[j] ] = 1;
                 }
